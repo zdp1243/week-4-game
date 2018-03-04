@@ -1,13 +1,15 @@
 $(document).ready(function() {
- 
-
+  //Wrap logic for js
   var winCounter = 0;
   var lossCounter = 0;
 
   //Generate randomNumber and link to #random to display in HTML.
   var randomNumber = Math.floor(Math.random() * 101) + 19;
+  console.log(randomNumber);
 
-  $("#random").text(randomNumber);
+  //$("#random").text(randomNumber); This did not work.
+
+  $("#random").attr("placeholder", randomNumber);
 
   //Generate red, blue, yellow and green crystal random numbers and write code for adding
   //to crystalSum and displaying when button is pushed.
@@ -17,94 +19,113 @@ $(document).ready(function() {
   var yCrysRand = Math.floor(Math.random() * 11) + 1;
   var gCrysRand = Math.floor(Math.random() * 11) + 1;
 
-  $("#winloss").html(winCounter);
-  $("#winloss").html(lossCounter);
-
   var counter = 0;
-  $("#curTotal").text(counter);
-  
-  
+
+  $("#win").attr("placeholder", winCounter); //.html did not work with the form. This inserts the score
+  $("#loss").attr("placeholder", lossCounter); //into the correct form space/display.
+  $("#curTotal").attr("placeholder", counter);
+
+  //Restart Game
   function restartGame() {
-    var randomNumber = Math.floor(Math.random() * 101) + 19;
-    $("#random").text(targetNumber);
+    randomNumber = Math.floor(Math.random() * 101) + 19;
 
-    var rCrysRand = Math.floor(Math.random() * 11) + 1;
-    var bCrysRand = Math.floor(Math.random() * 11) + 1;
-    var yCrysRand = Math.floor(Math.random() * 11) + 1;
-    var gCrysRand = Math.floor(Math.random() * 11) + 1;
+    $("#random").attr("placeholder", randomNumber);
 
-    var counter = 0;
-    $("curTotal").text(counter);
+    rCrysRand = Math.floor(Math.random() * 11) + 1;
+    bCrysRand = Math.floor(Math.random() * 11) + 1;
+    yCrysRand = Math.floor(Math.random() * 11) + 1;
+    gCrysRand = Math.floor(Math.random() * 11) + 1;
+
+    counter = 0;
+    $("#curTotal").attr("placeholder", counter);
   }
 
-  function wins() {
+  //Win
+  function win() {
     winCounter++;
-    $("#winloss").text(winCounter);
+    $("#win").attr("placeholder", winCounter);
     restartGame();
   }
 
-  function loss() {
+  //Lose
+  function lose() {
     lossCounter++;
-    $("#winloss").text(lossCounter);
+    $("#loss").attr("placeholder", lossCounter);
     restartGame();
   }
-for (var i=0 i<4; i++) {
 
-  $("#rCrysRand").on("click", function() {
+  //Red button
+  $("#red").on("click", function() {
     counter = counter + rCrysRand;
 
-    if (counter === targetNumber) {
+    $("#curTotal").attr("placeholder", counter);
+
+    //console.log(counter);
+
+    if (counter === randomNumber) {
       win();
-    } else if (counter > targetNumber) {
+    } else if (counter > randomNumber) {
       lose();
     }
   });
 
-  $("#bCrysRand").on("click", function() {
+  //Blue button
+  $("#blue").on("click", function() {
     counter = counter + bCrysRand;
+    $("#curTotal").attr("placeholder", counter);
 
-    if (counter === targetNumber) {
+    //console.log(counter)
+
+    if (counter === randomNumber) {
       win();
-    } else if (counter > targetNumber) {
+    } else if (counter > randomNumber) {
       lose();
     }
   });
 
-  $("#yCrysRand").on("click", function() {
+  //Yellow Crystal
+
+  $("#yellow").on("click", function() {
     counter = counter + yCrysRand;
+    $("#curTotal").attr("placeholder", counter);
 
-    if (counter === targetNumber) {
+    //console.log(counter)
+    if (counter === randomNumber) {
       win();
-    } else if (counter > targetNumber) {
+    } else if (counter > randomNumber) {
       lose();
     }
   });
 
-  $("#gCrysRand").on("click", function() {
+  //Green Crystal
+  $("#green").on("click", function() {
     counter = counter + gCrysRand;
+    $("#curTotal").attr("placeholder", counter);
 
-    if (counter === targetNumber) {
+    //console.log(counter)
+
+    if (counter === randomNumber) {
       win();
-    } else if (counter > targetNumber) {
+    } else if (counter > randomNumber) {
       lose();
+      cosole.log(lose);
     }
   });
-}
+  //
 });
 
-//Note:  This was as far as I got.  I couldn't figure out exactly why $document.ready wasn't working and
+//Note:  The original file submitted was as far as I got.  I couldn't figure out exactly why $document.ready wasn't working and
 //I couldn't console.log, so I couldn't check anything.  I know it is missing elements, and it doesn't run.
 
-// Code for game tallying wins and losses isn't set up the way I had wanted in HTML yet, because
-//I wanted to show wins/losses in the same form space.
+//Trent went through my files line by line and we figured out why things weren't logging, and then he went over the logic with me.
+//The only thing I can see that I didn't catch before was that the restartGame function does not kick in when the
+//counter goes above the number to match in the game.  The logic looks correct...
 
-//Couldn't get the style.css to load my background image.
-
- //id# tags in HTML:
-  //# random
-  //# winloss
-  //# red
-  //# blue
-  //# yellow
-  //# green
-  //# curTotal
+//id# tags in HTML:
+//# random
+//# winloss
+//# red
+//# blue
+//# yellow
+//# green
+//# curTotal
